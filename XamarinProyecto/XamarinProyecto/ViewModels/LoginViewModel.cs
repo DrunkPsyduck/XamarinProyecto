@@ -67,11 +67,10 @@ namespace XamarinProyecto.ViewModels
                 return new Command(async () =>
                 {
                     Usuario user = await this.service.GetUsuarioAsync(this.Username, this.Password);
-
-                   
+                                       
                     if (user != null)
                     {
-                        this.Status = "Works";
+                        //Modificar con la vista correspondiente
                         MainPage view = new MainPage();
                         Application.Current.MainPage.Navigation.PushModalAsync(view);
                     } else

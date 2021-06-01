@@ -8,13 +8,14 @@
             <StackLayout.BindingContext>
                 <viewmodels:LoginViewModel/>
             </StackLayout.BindingContext>
-            <!--<Label Text="Login "
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />-->
-            <Entry x:Name="username" Text="{Binding Username}" Placeholder="username"/>
-            <Entry x:Name="password" Text="{Binding Password}" Placeholder="password"/>
-            <Button Command="{Binding Validar}" Text="Iniciar sesion" />
-            <Label Text="{Binding Status}" FontSize="25" TextColor="Red" IsVisible="False"/>
+            <Label Text="Iniciar Sesión"
+                HorizontalOptions="CenterAndExpand" VerticalOptions="Start" FontSize="25" Padding="5 0 5 0"/>
+            <StackLayout>
+                <Entry x:Name="username" Text="{Binding Username}" Placeholder="username" VerticalOptions="StartAndExpand" HorizontalOptions="FillAndExpand"/>
+                <Entry x:Name="password" Text="{Binding Password}" IsPassword="True" Placeholder="password" VerticalOptions="StartAndExpand" HorizontalOptions="FillAndExpand" />
+                <Button Command="{Binding Validar}" Text="Iniciar sesion" BackgroundColor="LightPink"/>
+                <Label Text="{Binding Status}" FontSize="25" TextColor="Red" IsVisible="True" VerticalOptions="StartAndExpand" HorizontalOptions="CenterAndExpand"/>
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
