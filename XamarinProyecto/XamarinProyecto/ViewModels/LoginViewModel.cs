@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using XamarinProyecto.Base;
 using XamarinProyecto.Models;
@@ -60,21 +61,34 @@ namespace XamarinProyecto.ViewModels
             }
         }
 
+        private String _Ocupado;
+        public String Ocupado
+        {
+            get { return this._Ocupado; }
+            set
+            {
+                this._Ocupado = value;
+                OnPropertyChanged("Ocupado");
+            }
+        }
+
         public Command Validar
         {
             get
             {
                 return new Command(async () =>
                 {
+                    this.Ocupado = "True";
+                    this.Status = "";
                     Usuario user = await this.service.GetUsuarioAsync(this.Username, this.Password);
-                                       
                     if (user != null)
                     {
                         //Modificar con la vista correspondiente
                         MainPage view = new MainPage();
-                        Application.Current.MainPage.Navigation.PushModalAsync(view);
+                        Application.Current.MainPage.Navigation.PushAsync(view);
                     } else
                     {
+                        this.Ocupado = "False";
                         this.Status = "Usuario/Contraseña incorrecta";
                     }
                 });
