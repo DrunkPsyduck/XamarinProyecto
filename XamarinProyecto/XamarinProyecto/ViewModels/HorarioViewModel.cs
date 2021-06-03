@@ -6,6 +6,7 @@ using Xamarin.Forms;
 using XamarinProyecto.Base;
 using XamarinProyecto.Models;
 using XamarinProyecto.Service;
+using XamarinProyecto.Views;
 
 namespace XamarinProyecto.ViewModels
 {
@@ -126,6 +127,19 @@ namespace XamarinProyecto.ViewModels
                             this.Ocupado = "False";
                         }
                     }
+                });
+            }
+        }
+
+        public Command NuevaAsignatura
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    NuevoAsignaturaView view = new NuevoAsignaturaView();
+
+                    await Application.Current.MainPage.Navigation.PushModalAsync(view);
                 });
             }
         }

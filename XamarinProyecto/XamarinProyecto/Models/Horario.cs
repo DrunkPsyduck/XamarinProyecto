@@ -20,7 +20,7 @@ namespace XamarinProyecto.Models
         public String HoraFinal{ get; set; }
 
         [JsonProperty("dia")]
-        public String dia { get; set; }
+        public String Dia { get; set; }
 
         [JsonProperty("userId")]
         public int IdUsuario { get; set; }

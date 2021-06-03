@@ -6,10 +6,12 @@
              BindingContext="{Binding Source={x:Static local:App.ServiceLocator}, Path=HorarioViewModel}"
              x:Name="PageHorarioView">
     <ContentPage.Content>
+        
         <StackLayout>
             <Label Text="Horario"
                 VerticalOptions="Start" 
                 HorizontalOptions="CenterAndExpand" Padding="15" FontSize="25"/>
+            <Button Command="{Binding NuevaAsignatura}" Text="Nueva Asignatura"/>
             <Picker SelectedIndex="{Binding Dia}"  Title="Seleccione un día">
                 <Picker.Items>
                     <x:String>Lunes</x:String>

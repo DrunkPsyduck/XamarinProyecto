@@ -21,7 +21,7 @@ namespace XamarinProyecto.Service
             builder.RegisterType<ServiceUsuarios>();
             builder.RegisterType<LoginViewModel>();
             builder.RegisterType<HorarioViewModel>();
-
+            builder.RegisterType<NuevaAsignaturaViewModel>();
             this.container = builder.Build();
         }
 
@@ -38,6 +38,14 @@ namespace XamarinProyecto.Service
             get
             {
                 return this.container.Resolve<HorarioViewModel>();
+            }
+        }
+
+        public NuevaAsignaturaViewModel NuevaAsignaturaViewModel
+        {
+            get
+            {
+                return this.container.Resolve<NuevaAsignaturaViewModel>();
             }
         }
     }

@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="XamarinProyecto.Views.NuevoAsignaturaView"
+              xmlns:local="clr-namespace:XamarinProyecto"
+             BindingContext="{Binding Source={x:Static local:App.ServiceLocator}, Path=NuevaAsignaturaViewModel}"
+             x:Name="PageNuevaAsignaturaView">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Nueva asignatura"
+                VerticalOptions="Start" 
+                HorizontalOptions="CenterAndExpand" FontSize="25"/>
+            <StackLayout>
+                <Entry x:Name="idClase" Text="{Binding IdClase}" Placeholder="idClase" VerticalOptions="StartAndExpand" HorizontalOptions="FillAndExpand"/>
+                <Entry x:Name="asignatura" Text="{Binding Asignatura}" Placeholder="Asignatura" VerticalOptions="StartAndExpand" HorizontalOptions="FillAndExpand"/>
+                <TimePicker x:Name="horaEmpiece" Time="{Binding HoraEmpieze}" VerticalOptions="StartAndExpand" HorizontalOptions="FillAndExpand"/>
+                <TimePicker x:Name="HoraFinal" Time="{Binding HoraFinal}" VerticalOptions="StartAndExpand" HorizontalOptions="FillAndExpand"/>
+                <Picker SelectedIndex="{Binding Dia}"  Title="Seleccione un día">
+                    <Picker.Items>
+                        <x:String>Lunes</x:String>
+                        <x:String>Martes</x:String>
+                        <x:String>Miercoles</x:String>
+                        <x:String>Jueves</x:String>
+                        <x:String>Viernes</x:String>
+                    </Picker.Items>
+                </Picker>
+            </StackLayout>
+
+            <Button Command="{Binding NuevaAsignatura}" Text="Guardar asignatura"/>
+            <Label Text="{Binding Status}"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

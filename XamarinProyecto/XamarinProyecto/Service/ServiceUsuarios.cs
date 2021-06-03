@@ -64,5 +64,29 @@ namespace XamarinProyecto.Service
            
         }
 
+        public async Task InsertAsignatura(int id, String asignatura, String horaEmpiece, String horaFinal, string dia)
+        {
+            Usuario user = Barrel.Current.Get<Usuario>("USUARIO");
+            int usuario = user.IdUsuario;
+            Horario horario = new Horario
+            {
+                IdClase = id,
+                Asignatura = asignatura,
+                HoraEmpiece = horaEmpiece,
+                HoraFinal = horaFinal,
+                Dia = dia,
+                IdUsuario = usuario
+            };
+            String json = JsonConvert.SerializeObject(horario);
+            StringContent content =
+                new StringContent(json, Encoding.UTF8, "application/json");
+            using (HttpClient client = new HttpClient())
+            {
+                String request = "​/api/Horario";
+                Uri uri = new Uri(this.url + request);
+                await client.PostAsync(uri, content);
+            }
+        }
+
     }
 }
