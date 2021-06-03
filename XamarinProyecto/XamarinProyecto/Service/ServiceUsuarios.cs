@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿
+using MonkeyCache.FileStore;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -17,28 +19,49 @@ namespace XamarinProyecto.Service
             this.url = "https://estudianteappservicioxamaml.azurewebsites.net/";
         }
 
+        private async Task<T> CallApiAsync<T>(String request)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(this.url);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add
+                    (new MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage response =
+                    await client.GetAsync(request);
+                if (response.IsSuccessStatusCode)
+                {
+                    String json =
+                        await response.Content.ReadAsStringAsync();
+                    T data =
+                        JsonConvert.DeserializeObject<T>(json);
+                    return data;
+                }
+                else
+                {
+                    return default(T);
+                }
+            }
+        }
+
+
         public async Task<Usuario> GetUsuarioAsync(String username, String password)
         {
+
             String request = "/api/Usuario/GetUsuario/" + username + "/" + password;
-            Uri uri = new Uri(this.url + request);
-            HttpClient client = new HttpClient();
-            client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add
-                (new MediaTypeWithQualityHeaderValue("application/json"));
-            HttpResponseMessage response =
-                await client.GetAsync(uri);
-            if (response.IsSuccessStatusCode)
-            {
-                String data =
-                    await response.Content.ReadAsStringAsync();
-                Usuario usuario =
-                    JsonConvert.DeserializeObject<Usuario>(data);
-                return usuario;
-            }
-            else
-            {
-                return null;
-            }
+            Usuario usuario = await this.CallApiAsync<Usuario>(request);
+            return usuario;          
+        }
+
+        public async Task<List<Horario>> GetHorario(String dia)
+        {
+
+            Usuario user = Barrel.Current.Get<Usuario>("USUARIO");
+            String usuario = user.IdUsuario.ToString();
+            String request = "/api/Horario/GetClasesUser/" + usuario + "/" + dia;
+            List<Horario> clases = await this.CallApiAsync<List<Horario>>(request);
+            return clases;
+           
         }
 
     }

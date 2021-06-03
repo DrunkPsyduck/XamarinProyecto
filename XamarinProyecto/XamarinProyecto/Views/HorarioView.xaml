@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="XamarinProyecto.Views.HorarioView"
+             xmlns:local="clr-namespace:XamarinProyecto"
+             BindingContext="{Binding Source={x:Static local:App.ServiceLocator}, Path=HorarioViewModel}"
+             x:Name="PageHorarioView">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Horario"
+                VerticalOptions="Start" 
+                HorizontalOptions="CenterAndExpand" Padding="15" FontSize="25"/>
+            <Picker SelectedIndex="{Binding Dia}"  Title="Seleccione un día">
+                <Picker.Items>
+                    <x:String>Lunes</x:String>
+                    <x:String>Martes</x:String>
+                    <x:String>Miercoles</x:String>
+                    <x:String>Jueves</x:String>
+                    <x:String>Viernes</x:String>
+                </Picker.Items>
+            </Picker>
+            <Button Command="{Binding GetHorario}" Text="Ver horario"/>
+            <ActivityIndicator VerticalOptions="Center" HorizontalOptions="Center" Color="Pink" IsRunning="{Binding Ocupado}" IsVisible="{Binding Ocupado}" IsEnabled="{Binding Ocupado}"/>
+            <Label Text="{Binding Status}" FontSize="25"/>
+
+            <CollectionView ItemsSource="{Binding ListaHorario}">                                <CollectionView.ItemTemplate>                    <DataTemplate>                        <StackLayout>                            <Label Text="{Binding IdClase}"                               HorizontalOptions="Center"  FontSize="25"/>                            <Label Text="{Binding Asignatura}"                               HorizontalOptions="Center" TextColor="Blue" FontSize="25"/>                            <Label Text="{Binding HoraEmpiece}"                               HorizontalOptions="Center"  FontSize="25"/>                            <Label Text="{Binding HoraFinal}"                               HorizontalOptions="Center"  FontSize="25"/>                        </StackLayout>                    </DataTemplate>                </CollectionView.ItemTemplate>            </CollectionView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

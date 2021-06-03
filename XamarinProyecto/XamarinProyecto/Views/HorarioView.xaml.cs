@@ -10,13 +10,11 @@ using Xamarin.Forms.Xaml;
 namespace XamarinProyecto.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class LoginView : ContentPage
+    public partial class HorarioView : ContentPage
     {
-        public LoginView()
+        public HorarioView()
         {
             InitializeComponent();
-
-            
         }
     }
 }

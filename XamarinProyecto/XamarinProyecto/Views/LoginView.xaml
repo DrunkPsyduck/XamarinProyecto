@@ -4,7 +4,7 @@
              xmlns:local="clr-namespace:XamarinProyecto"
              x:Class="XamarinProyecto.Views.LoginView"
              BindingContext="{Binding Source={x:Static local:App.ServiceLocator}, Path=LoginViewModel}"
-             x:Name="PageDepartamentosView">
+             x:Name="PageLoginView">
     <ContentPage.Content>
         <StackLayout>
             
@@ -16,7 +16,6 @@
                 <Button Command="{Binding Validar}" Text="Iniciar sesion" BackgroundColor="LightPink"/>
                 <Label Text="{Binding Status}" FontSize="25" TextColor="Red" IsVisible="True" VerticalOptions="StartAndExpand" HorizontalOptions="CenterAndExpand"/>
                 <ActivityIndicator VerticalOptions="Center" HorizontalOptions="Center" Color="Pink" IsRunning="{Binding Ocupado}" IsVisible="{Binding Ocupado}" IsEnabled="{Binding Ocupado}"/>
-                
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>

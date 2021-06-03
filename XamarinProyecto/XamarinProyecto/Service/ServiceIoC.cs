@@ -20,6 +20,8 @@ namespace XamarinProyecto.Service
             ContainerBuilder builder = new ContainerBuilder();
             builder.RegisterType<ServiceUsuarios>();
             builder.RegisterType<LoginViewModel>();
+            builder.RegisterType<HorarioViewModel>();
+
             this.container = builder.Build();
         }
 
@@ -28,6 +30,14 @@ namespace XamarinProyecto.Service
             get
             {
                 return this.container.Resolve<LoginViewModel>();
+            }
+        }
+
+        public HorarioViewModel HorarioViewModel
+        {
+            get
+            {
+                return this.container.Resolve<HorarioViewModel>();
             }
         }
     }

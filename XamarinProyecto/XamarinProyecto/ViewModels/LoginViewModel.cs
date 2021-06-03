@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MonkeyCache.FileStore;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
@@ -7,25 +8,18 @@ using Xamarin.Forms;
 using XamarinProyecto.Base;
 using XamarinProyecto.Models;
 using XamarinProyecto.Service;
+using XamarinProyecto.Views;
 
 namespace XamarinProyecto.ViewModels
 {
     public class LoginViewModel : ViewModelBase
     {
         ServiceUsuarios service;
+
         public LoginViewModel()
         {
             this.service = new ServiceUsuarios();
-        }
-
-        public Command Login
-        {
-            get
-            {
-                return new Command(async () => {
-                    
-                });
-            }
+          
         }
 
         private String _Username;
@@ -72,6 +66,8 @@ namespace XamarinProyecto.ViewModels
             }
         }
 
+
+
         public Command Validar
         {
             get
@@ -81,11 +77,14 @@ namespace XamarinProyecto.ViewModels
                     this.Ocupado = "True";
                     this.Status = "";
                     Usuario user = await this.service.GetUsuarioAsync(this.Username, this.Password);
+                    
                     if (user != null)
                     {
-                        //Modificar con la vista correspondiente
-                        MainPage view = new MainPage();
-                        Application.Current.MainPage.Navigation.PushAsync(view);
+                        Barrel.Current.Add("USUARIO", user, TimeSpan.FromMinutes(20));
+                        Barrel.Current.Add("USUARIOID", user.IdUsuario, TimeSpan.FromMinutes(20));
+                        HorarioView view = new HorarioView();
+                        
+                        await Application.Current.MainPage.Navigation.PushModalAsync(view);
                     } else
                     {
                         this.Ocupado = "False";

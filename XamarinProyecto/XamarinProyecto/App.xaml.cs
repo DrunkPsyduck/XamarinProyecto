@@ -1,4 +1,6 @@
-﻿using System;
+﻿
+using MonkeyCache.FileStore;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using XamarinProyecto.Service;
@@ -22,6 +24,7 @@ namespace XamarinProyecto
         {
             InitializeComponent();
 
+            Barrel.ApplicationId = "com.proyectoXamarin";
             MainPage = new LoginView();
         }
 
